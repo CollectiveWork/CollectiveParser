@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -14,5 +17,16 @@ public class Tokens {
     public static ArrayList<String> literals = new ArrayList<String>();
     public static ArrayList<String> comments = new ArrayList<String>();
 
+    public static void readKeywords(){
+        String[] keywords_raw = Reader.readFile("resources//keywords.txt", null).split(" ");
 
+        for(String keyword : keywords_raw){
+            keywords.add(keyword);
+        }
+    }
+
+    public static void readTokens(){
+        readKeywords();
+
+    }
 }

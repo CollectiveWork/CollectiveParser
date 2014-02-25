@@ -13,6 +13,7 @@ public class CharacterSet {
     public static String[] alphanumeric;
     public static String[] special;
     public static String[] graphic;
+    public static String[] spaces;
 
 
     public static void readCharacterSet(String filePath){
@@ -35,6 +36,7 @@ public class CharacterSet {
         String alphabetic_raw = lower_case_raw + " " + upper_case_raw;
         String alphanumeric_raw = alphabetic_raw + " " + numeric_raw;
         String graphic_raw = alphanumeric_raw + " " + special_raw;
+        String spaces_raw = " |\t|\013|\n|\f";
 
         lower_case = lower_case_raw.split(" ");
         upper_case = upper_case_raw.split(" ");
@@ -43,6 +45,6 @@ public class CharacterSet {
         alphanumeric = alphanumeric_raw.split(" ");
         special = special_raw.split(" ");
         graphic = graphic_raw.split(" ");
-
+        spaces = spaces_raw.split("\\|");
     }
 }

@@ -17,9 +17,16 @@ public class Reader {
     public Reader() {
     }
 
-    static String readFile(String path, Charset encoding) throws IOException {
-        if(encoding==null)encoding=StandardCharsets.UTF_8;
-        byte[] encoded = Files.readAllBytes(Paths.get(path));
+    static String readFile(String path, Charset encoding) {
+        if(encoding==null)
+            encoding=StandardCharsets.UTF_8;
+
+        byte[] encoded = new byte[0];
+        try {
+            encoded = Files.readAllBytes(Paths.get(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return encoding.decode(ByteBuffer.wrap(encoded)).toString();
     }
 
