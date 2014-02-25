@@ -1,0 +1,36 @@
+import edu.cmu.cs.pattis.cs151xx.Prompt;
+
+public class Application {
+
+  public static void main(String[] args)
+    {
+      try {
+
+        double gravity;        //meter/sec/sec
+        double height;         //meters
+        double time;           //sec
+
+
+        //Input
+
+        gravity = Prompt.forDouble("Enter gravitational acceleration (in meters/sec/sec)");
+        height  = Prompt.forDouble("Enter height of drop (in meters)");
+
+
+        //Calculate
+
+        time = Math.sqrt(2.*height/gravity);
+
+
+        //Output
+
+        System.out.println("\nDrop time = " + time + " secs");
+
+
+      }catch (Exception e) {
+        e.printStackTrace();
+        System.out.println("main method in Application class terminating");
+        System.exit(0);
+   }
+
+}
