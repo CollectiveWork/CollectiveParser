@@ -1,7 +1,3 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -17,15 +13,46 @@ public class Tokens {
     public static ArrayList<String> literals = new ArrayList<String>();
     public static ArrayList<String> comments = new ArrayList<String>();
 
-    public static void readKeywords(){
-        String[] keywords_raw = Reader.readFile("resources//keywords.txt", null).split(" ");
+    private static boolean validateIdStart(char chr) {
+        String id = "" + chr;
+        return (CharacterSet.alphabetic.contains(id) || id.equals("$") || id.equals("_"));
+    }
 
-        for(String keyword : keywords_raw){
+    private static boolean validateIdentifier(char chr) {
+        String id = "" + chr;
+        return (validateIdStart(chr) || CharacterSet.numeric.contains(id));
+    }
+
+    public static boolean checkIdentifier(String identifier) {
+        if (validateIdStart(identifier.charAt(0))) {
+            for (int i = 1; i < identifier.length(); i++) {
+                if (!validateIdentifier(identifier.charAt(i))) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static void readKeywords() {
+        String[] keywords_raw = Reader.readFile("resources//java//keywords.txt", null).split(" ");
+
+        for (String keyword : keywords_raw) {
             keywords.add(keyword);
         }
     }
 
-    public static void readTokens(){
+    public static void readSeparators(){
+        String[] separators_raw = Reader.readFile("resources//java//separators.txt", null).split(" ");
+
+        for (String separator : separators_raw) {
+            separators.add(separator);
+        }
+    }
+
+    public static void readTokens() {
         readKeywords();
 
     }

@@ -6,11 +6,19 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
-        Reader.readFile("resources//code.txt", null);
-        CharacterSet.readCharacterSet("resources//javaCharset.txt");
+        Reader.readFile("resources//java//code.txt", null);
+        CharacterSet.readCharacterSet("resources//java//charset.txt");
         Tokens.readTokens();
 
         System.out.println(Tokens.keywords);
 
+        System.out.println(""+ Tokens.checkIdentifier("ceva"));
+        System.out.println(""+ Tokens.checkIdentifier("$ceva"));
+        System.out.println(""+ Tokens.checkIdentifier("234ceva"));
+        System.out.println(""+ Tokens.checkIdentifier("ce543va"));
+        System.out.println(""+ Tokens.checkIdentifier("ce$v63a"));
+        System.out.println(""+ Tokens.checkIdentifier("_ceva"));
+        System.out.println(""+ Tokens.checkIdentifier("ce_va"));
+        System.out.println(""+ Tokens.checkIdentifier("Ce va"));
     }
 }

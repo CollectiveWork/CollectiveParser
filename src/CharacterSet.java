@@ -6,13 +6,13 @@ import java.io.IOException;
  * Created by Cristi on 2/25/14.
  */
 public class CharacterSet {
-    public static String[] lower_case;
-    public static String[] upper_case;
-    public static String[] alphabetic;
-    public static String[] numeric;
-    public static String[] alphanumeric;
-    public static String[] special;
-    public static String[] graphic;
+    public static String lower_case;
+    public static String upper_case;
+    public static String alphabetic;
+    public static String numeric;
+    public static String alphanumeric;
+    public static String special;
+    public static String graphic;
     public static String[] spaces;
 
 
@@ -33,18 +33,18 @@ public class CharacterSet {
             e.printStackTrace();
         }
 
-        String alphabetic_raw = lower_case_raw + " " + upper_case_raw;
-        String alphanumeric_raw = alphabetic_raw + " " + numeric_raw;
-        String graphic_raw = alphanumeric_raw + " " + special_raw;
+        String alphabetic_raw = lower_case_raw + upper_case_raw;
+        String alphanumeric_raw = alphabetic_raw + numeric_raw;
+        String graphic_raw = alphanumeric_raw + special_raw;
         String spaces_raw = " |\t|\013|\n|\f";
 
-        lower_case = lower_case_raw.split(" ");
-        upper_case = upper_case_raw.split(" ");
-        alphabetic = alphabetic_raw.split(" ");
-        numeric = numeric_raw.split(" ");
-        alphanumeric = alphanumeric_raw.split(" ");
-        special = special_raw.split(" ");
-        graphic = graphic_raw.split(" ");
+        lower_case = lower_case_raw;
+        upper_case = upper_case_raw;
+        alphabetic = alphabetic_raw;
+        numeric = numeric_raw;
+        alphanumeric = alphanumeric_raw;
+        special = special_raw;
+        graphic = graphic_raw;
         spaces = spaces_raw.split("\\|");
     }
 }
