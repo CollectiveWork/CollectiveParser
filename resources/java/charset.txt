@@ -2,3 +2,4 @@ abcdefghijklmnopqrstuvwxyz
 ABCDEFGHIJKLMNOPQRSTUVWXYZ
 0123456789
 !%^&*()-+={}|~[]\;':"<>?,./#@`_
+\n|\t|\v|\b|\r|\f|\a|\\|\'|\"

@@ -14,6 +14,7 @@ public class CharacterSet {
     public static String special;
     public static String graphic;
     public static String[] spaces;
+    public static String[] escapeSequences;
 
 
     public static void readCharacterSet(String filePath){
@@ -21,6 +22,7 @@ public class CharacterSet {
         String upper_case_raw = "";
         String numeric_raw = "";
         String special_raw = "";
+        String escape_sequences_raw = "";
         try {
             FileReader fileReader = new FileReader(filePath);
             BufferedReader textReader = new BufferedReader(fileReader);
@@ -29,6 +31,7 @@ public class CharacterSet {
             upper_case_raw = textReader.readLine();
             numeric_raw = textReader.readLine();
             special_raw = textReader.readLine();
+            escape_sequences_raw = textReader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,6 +40,7 @@ public class CharacterSet {
         String alphanumeric_raw = alphabetic_raw + numeric_raw;
         String graphic_raw = alphanumeric_raw + special_raw;
         String spaces_raw = " |\t|\013|\n|\f";
+        escape_sequences_raw += "|\n|\t|\b|\r|\f|\\|\'|\"| ";
 
         lower_case = lower_case_raw;
         upper_case = upper_case_raw;
@@ -46,5 +50,6 @@ public class CharacterSet {
         special = special_raw;
         graphic = graphic_raw;
         spaces = spaces_raw.split("\\|");
+        escapeSequences = escape_sequences_raw.split("\\|");
     }
 }

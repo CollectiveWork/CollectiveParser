@@ -12,6 +12,7 @@ public class Main {
 
         System.out.println(Tokens.keywords);
 
+// check identifiers
 //        System.out.println(""+ Tokens.checkIdentifier("ceva"));
 //        System.out.println(""+ Tokens.checkIdentifier("$ceva"));
 //        System.out.println(""+ Tokens.checkIdentifier("234ceva"));
@@ -21,7 +22,7 @@ public class Main {
 //        System.out.println(""+ Tokens.checkIdentifier("ce_va"));
 //        System.out.println(""+ Tokens.checkIdentifier("Ce va"));
 
-
+// check int
 //        System.out.println(Tokens.Literals.checkIntegerLiteral("100"));
 //        System.out.println(Tokens.Literals.checkIntegerLiteral("100a"));
 //        System.out.println(Tokens.Literals.checkIntegerLiteral("a100"));
@@ -30,14 +31,46 @@ public class Main {
 //        System.out.println(Tokens.Literals.checkIntegerLiteral("0105"));
 //        System.out.println(Tokens.Literals.checkIntegerLiteral("0x108"));
 
-        System.out.println(Tokens.Literals.checkFloatingPointLiteral("1E2"));
-        System.out.println(Tokens.Literals.checkFloatingPointLiteral("1E-2"));
-        System.out.println(Tokens.Literals.checkFloatingPointLiteral("1.00"));
-        System.out.println(Tokens.Literals.checkFloatingPointLiteral("1."));
-        System.out.println(Tokens.Literals.checkFloatingPointLiteral("1.E2"));
-        System.out.println(Tokens.Literals.checkFloatingPointLiteral("1.23E-2"));
-        System.out.println(Tokens.Literals.checkFloatingPointLiteral(".001"));
-        System.out.println(Tokens.Literals.checkFloatingPointLiteral(".001E5"));
+// check boolean
+//        System.out.println(Tokens.Literals.checkFloatingPointLiteral("1E2"));
+//        System.out.println(Tokens.Literals.checkFloatingPointLiteral("1E-2"));
+//        System.out.println(Tokens.Literals.checkFloatingPointLiteral("1.00"));
+//        System.out.println(Tokens.Literals.checkFloatingPointLiteral("1."));
+//        System.out.println(Tokens.Literals.checkFloatingPointLiteral("1.E2"));
+//        System.out.println(Tokens.Literals.checkFloatingPointLiteral("1.23E-2"));
+//        System.out.println(Tokens.Literals.checkFloatingPointLiteral(".001"));
+//        System.out.println(Tokens.Literals.checkFloatingPointLiteral(".001E5"));
 
+// check boolean
+//        System.out.println(Tokens.Literals.checkBooleanLiteral("true"));
+//        System.out.println(Tokens.Literals.checkBooleanLiteral("false"));
+//        System.out.println(Tokens.Literals.checkBooleanLiteral("truasdasa"));
+
+// check char
+//        System.out.println(Tokens.Literals.checkCharLiteral("'\n'")); // correct
+//        System.out.println(Tokens.Literals.checkCharLiteral("'\t'")); // correct
+//        System.out.println(Tokens.Literals.checkCharLiteral("'\\'")); // correct
+//        System.out.println(Tokens.Literals.checkCharLiteral("'\''")); // correct
+//        System.out.println(Tokens.Literals.checkCharLiteral("'a'"));  // correct
+//        System.out.println(Tokens.Literals.checkCharLiteral("'as'")); // wrong
+//        System.out.println(Tokens.Literals.checkCharLiteral("'\\n'"));// wrong
+//        System.out.println(Tokens.Literals.checkCharLiteral("' '"));  // correct
+//        System.out.println(Tokens.Literals.checkCharLiteral("'  '")); // wrong
+//        System.out.println(Tokens.Literals.checkCharLiteral("'X'"));  // correct
+//        System.out.println(Tokens.Literals.checkCharLiteral("'a"));   // wrong
+//        System.out.println(Tokens.Literals.checkCharLiteral("''"));   // wrong
+
+// check string
+//        System.out.println(Tokens.Literals.checkStringLiteral("\"dasdsa\""));
+//        System.out.println(Tokens.Literals.checkStringLiteral("\"\\n\\nEnter your SSN:\""));
+//        System.out.println(Tokens.Literals.checkStringLiteral("\"X\""));
+//        System.out.println(Tokens.Literals.checkStringLiteral("\"CMU\""));
+//        System.out.println(Tokens.Literals.checkStringLiteral("\"dasdsa"));
+//        System.out.println(Tokens.Literals.checkStringLiteral("\"dasds'a\""));
+//        System.out.println(Tokens.Literals.checkStringLiteral("\"\""));
+
+// check null
+//        System.out.println(Tokens.Literals.checkNullLiteral("null"));
+//        System.out.println(Tokens.Literals.checkNullLiteral("dasdsa"));
     }
 }
