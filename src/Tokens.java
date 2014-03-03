@@ -9,12 +9,12 @@ public class Tokens {
     public static ArrayList<String> separators = new ArrayList<>();
     public static ArrayList<String> operators = new ArrayList<>();
 
-    private static boolean validateIdStart(char chr) {
+    public static boolean validateIdStart(char chr) {
         String id = "" + chr;
         return (CharacterSet.alphabetic.contains(id) || id.equals("$") || id.equals("_"));
     }
 
-    private static boolean validateIdentifier(char chr) {
+    public static boolean validateIdentifierChr(char chr) {
         String id = "" + chr;
         return (validateIdStart(chr) || CharacterSet.numeric.contains(id));
     }
@@ -22,7 +22,7 @@ public class Tokens {
     public static String checkIdentifier(String identifier) {
         if (validateIdStart(identifier.charAt(0))) {
             for (int i = 1; i < identifier.length(); i++) {
-                if (!validateIdentifier(identifier.charAt(i))) {
+                if (!validateIdentifierChr(identifier.charAt(i))) {
                     return "wrong|identifier|wrongChar";
                 }
             }
@@ -56,7 +56,7 @@ public class Tokens {
         readOperators();
     }
 
-    private static String validateOperator(String operator){
+    public static String validateOperator(String operator){
         for(String op : operators){
             if(op.equals(operator))
                 return "correct|operator|" + operator + "|correctOperator";
@@ -65,7 +65,7 @@ public class Tokens {
         return "wrong|operator|" + operator + "|wrongOperator";
     }
 
-    private static String validateSeparator(String separator){
+    public static String validateSeparator(String separator){
         for(String se : separators){
             if(se.equals(separator))
                 return "correct|separator|" + separator + "|correctSeparator";
@@ -74,7 +74,7 @@ public class Tokens {
         return "wrong|separator|" + separator + "|wrongSeparator";
     }
 
-    private static String validateKeyword(String keyword){
+    public static String validateKeyword(String keyword){
         for(String key : keywords){
             if(key.equals(keyword))
                 return "correct|keyword|" + keyword + "|correctKeyword";

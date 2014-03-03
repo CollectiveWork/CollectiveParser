@@ -1,4 +1,5 @@
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Cristi on 2/25/14.
@@ -6,11 +7,15 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
+        ArrayList<HashMap<String, String>> tokens = new ArrayList<>();
         Reader.readFile("resources//java//code.txt", null);
         CharacterSet.readCharacterSet("resources//java//charset.txt");
         Tokens.readTokens();
 
         System.out.println(Tokens.keywords);
+        Reader red = new Reader();
+        String file = Reader.readFile("resources//java//code.txt", null);
+        tokens = red.parseFile(file);
 
 // check identifiers
 //        System.out.println(""+ Tokens.checkIdentifier("ceva"));
