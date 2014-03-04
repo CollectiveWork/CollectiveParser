@@ -1,3 +1,26 @@
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//
+// Description:
+//
+ //   This program computes the time it take to drop an object (in a vacuum)
+// form an arbitrary height in an arbitrary gravitational field (so it can
+// be used to calculate drop times on other planets). It models a straight
+// input/calculate/output program: the user enters the gravitation field
+// and then the height; it calculates thd drop time and then prints in on
+// the console.
+//
+ //////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+  /*
+    here is an outer
+    comment with an
+    /* inner comment inside */
+    and the finish of the outer
+    comment at the end
+*/
+
 import edu.cmu.cs.pattis.cs151xx.Prompt;
 
 public class Application {
@@ -10,7 +33,11 @@ public class Application {
         double height;         //meters
         double time;           //sec
 
+        String test = new String();
+        if(test instanceof String)
+            time = 't';
 
+        gravity = .4;
         //Input
 
         gravity = Prompt.forDouble("Enter gravitational acceleration (in meters/sec/sec)");
@@ -19,6 +46,7 @@ public class Application {
 
         //Calculate
 
+        time += 4a;
         time = Math.sqrt(2.*height/gravity);
 
 

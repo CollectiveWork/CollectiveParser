@@ -17,6 +17,12 @@ public class Main {
         String file = Reader.readFile("resources//java//code.txt", null);
         tokens = red.parseFile(file);
 
+        for(HashMap<String, String> token : tokens){
+            //System.out.println(token.get("type") + " " + token.get("length") + " " + token.get("line") + " " + token.get("pointer"));
+            if(token.get("error") != null) System.out.println(token);
+            //System.out.println(token);
+        }
+
 // check identifiers
 //        System.out.println(""+ Tokens.checkIdentifier("ceva"));
 //        System.out.println(""+ Tokens.checkIdentifier("$ceva"));

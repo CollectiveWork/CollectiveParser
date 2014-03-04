@@ -56,31 +56,51 @@ public class Tokens {
         readOperators();
     }
 
-    public static String validateOperator(String operator){
-        for(String op : operators){
-            if(op.equals(operator))
+    public static boolean shouldStop(char chr){
+        if(isSeparator(chr) || CharacterSet.isSpace(chr))
+            return true;
+
+        return false;
+    }
+
+    public static String validateOperator(String operator) {
+        for (String op : operators) {
+            if (op.equals(operator))
                 return "correct|operator|" + operator + "|correctOperator";
         }
 
         return "wrong|operator|" + operator + "|wrongOperator";
     }
 
-    public static String validateSeparator(String separator){
-        for(String se : separators){
-            if(se.equals(separator))
+    public static boolean isSeparator(char separator) {
+        for (String se : separators) {
+            if (se.equals("" + separator))
+                return true;
+        }
+
+        return false;
+    }
+
+    public static boolean validateOperatorChar(char chr) {
+        return "=><!~?:&|+-*/^%".contains("" + chr);
+    }
+
+    public static String validateSeparator(String separator) {
+        for (String se : separators) {
+            if (se.equals(separator))
                 return "correct|separator|" + separator + "|correctSeparator";
         }
 
         return "wrong|separator|" + separator + "|wrongSeparator";
     }
 
-    public static String validateKeyword(String keyword){
-        for(String key : keywords){
-            if(key.equals(keyword))
-                return "correct|keyword|" + keyword + "|correctKeyword";
+    public static String validateKeyword(String keyword) {
+        for (String key : keywords) {
+            if (key.equals(keyword))
+                return "correct|" + keyword + "|keyword|correctKeyword";
         }
 
-        return "wrong|keyword|" + keyword + "|wrongKeyword";
+        return "wrong|" + keyword + "|keyword|wrongKeyword";
     }
 
     public static class Literals {
@@ -138,7 +158,7 @@ public class Tokens {
         }
 
         public static String checkIntegerLiteral(String literal) {
-            if (literal.substring(0, 2).equals("0x")) {
+            if (literal.length() > 2 && literal.substring(0, 2).equals("0x")) {
                 if (validateHexidecimalNumeral(literal))
                     return "correct|literal|int|hexidecimalNumeral";
                 else
@@ -282,6 +302,14 @@ public class Tokens {
             return checkType1FPL(literal);
         }
 
+        public static boolean validateNumberChar(char chr) {
+            return "0123456789+-.eEx".contains("" + chr);
+        }
+
+        public static boolean validateNumbericChar(char chr) {
+            return "0123456789".contains("" + chr);
+        }
+
         public static String checkBooleanLiteral(String literal) {
             if (literal.equals("true"))
                 return "correct|literal|boolean|trueBoolean";
@@ -298,9 +326,16 @@ public class Tokens {
             return false;
         }
 
+        public static boolean validateChar(char chr) {
+            return (CharacterSet.graphic.contains("" + chr) || validateEscapeSequenceChar("" + chr));
+        }
+
         public static String checkCharLiteral(String literal) {
             if (literal.length() > 3)
                 return "wrong|literal|char|charLengthIsTooBig";
+
+            if (literal.charAt(0) == '\'' && literal.charAt(1) == '\'')
+                return "wrong|literal|char|charCannotBeEmpty";
 
             if (literal.length() < 3)
                 return "wrong|literal|char|charLengthIsTooSmall";
@@ -314,11 +349,11 @@ public class Tokens {
             return "correct|literal|char|correctChar";
         }
 
-        private static boolean validateString(String literal){
+        private static boolean validateString(String literal) {
             String chr;
             for (int i = 0; i < literal.length(); i++) {
                 chr = "" + literal.charAt(i);
-                if(!(CharacterSet.graphic.contains(chr) || validateEscapeSequenceChar(chr)))
+                if (!(CharacterSet.graphic.contains(chr) || validateEscapeSequenceChar(chr)))
                     return false;
             }
             return true;
@@ -329,14 +364,14 @@ public class Tokens {
             String firstChar = "" + literal.charAt(0);
             String lastChar = "" + literal.charAt(length - 1);
 
-            if(!(firstChar.equals("\"") && lastChar.equals("\"") && validateString(literal.substring(1, length - 1))))
+            if (!(firstChar.equals("\"") && lastChar.equals("\"") && validateString(literal.substring(1, length - 1))))
                 return "wrong|literal|string|illegalString";
 
             return "correct|literal|string|correctString";
         }
 
-        public static String checkNullLiteral(String literal){
-            return literal.equals("null")? "correct|literal|null|nullReference" : "wrong|literal|null|notANullReference";
+        public static String checkNullLiteral(String literal) {
+            return literal.equals("null") ? "correct|literal|null|nullReference" : "wrong|literal|null|notANullReference";
         }
     }
 }

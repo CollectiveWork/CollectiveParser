@@ -52,4 +52,12 @@ public class CharacterSet {
         spaces = spaces_raw.split("\\|");
         escapeSequences = escape_sequences_raw.split("\\|");
     }
+
+    public static boolean isSpace(char chr){
+        for(String sp : spaces){
+            if(sp.equals("" + chr))
+                return true;
+        }
+        return false;
+    }
 }
