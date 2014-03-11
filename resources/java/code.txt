@@ -37,7 +37,7 @@ public class Application {
         if(test instanceof String)
             time = 't';
 
-        gravity = .4;
+        gravity = .42e4;
         //Input
 
         gravity = Prompt.forDouble("Enter gravitational acceleration (in meters/sec/sec)");

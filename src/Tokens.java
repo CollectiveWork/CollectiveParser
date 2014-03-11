@@ -57,10 +57,8 @@ public class Tokens {
     }
 
     public static boolean shouldStop(char chr){
-        if(isSeparator(chr) || CharacterSet.isSpace(chr))
-            return true;
+        return isSeparator(chr) || CharacterSet.isSpace(chr);
 
-        return false;
     }
 
     public static String validateOperator(String operator) {
@@ -104,13 +102,6 @@ public class Tokens {
     }
 
     public static class Literals {
-
-        public static ArrayList<String> integer_literal = new ArrayList<>();
-        public static ArrayList<String> floating_point_literal = new ArrayList<>();
-        public static ArrayList<String> boolean_literal = new ArrayList<>();
-        public static ArrayList<String> character_literal = new ArrayList<>();
-        public static ArrayList<String> string_literal = new ArrayList<>();
-        public static ArrayList<String> null_literal = new ArrayList<>();
 
         private static boolean validateDigits(String literal, String digit) {
             String chr;
@@ -331,18 +322,27 @@ public class Tokens {
         }
 
         public static String checkCharLiteral(String literal) {
-            if (literal.length() > 3)
+            if (literal.length() < 3)
+                return "wrong|literal|char|charLengthIsTooSmall";
+
+            if (literal.length() > 3 && literal.charAt(1) != '\\')
                 return "wrong|literal|char|charLengthIsTooBig";
 
             if (literal.charAt(0) == '\'' && literal.charAt(1) == '\'')
                 return "wrong|literal|char|charCannotBeEmpty";
 
-            if (literal.length() < 3)
-                return "wrong|literal|char|charLengthIsTooSmall";
 
             String chr1 = "" + literal.charAt(0);
-            String chr2 = "" + literal.charAt(1);
-            String chr3 = "" + literal.charAt(2);
+            String chr2, chr3;
+            if(literal.charAt(1) == '\\' && literal.length() > 3){
+                chr2 = "" + literal.charAt(1) + literal.charAt(2);
+                chr3 = "" + literal.charAt(3);
+            }
+            else{
+                chr2 = "" + literal.charAt(1);
+                chr3 = "" + literal.charAt(2);
+            }
+
             if (!(chr1.equals("'") && (CharacterSet.graphic.contains(chr2) || validateEscapeSequenceChar(chr2)) && chr3.equals("'")))
                 return "wrong|literal|char|illegalChar";
 
@@ -364,7 +364,7 @@ public class Tokens {
             String firstChar = "" + literal.charAt(0);
             String lastChar = "" + literal.charAt(length - 1);
 
-            if (!(firstChar.equals("\"") && lastChar.equals("\"") && validateString(literal.substring(1, length - 1))))
+            if (!(firstChar.equals("\"") && lastChar.equals("\"") /*&& validateString(literal.substring(1, length - 1))*/ ))
                 return "wrong|literal|string|illegalString";
 
             return "correct|literal|string|correctString";

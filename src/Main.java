@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<HashMap<String, String>> tokens = new ArrayList<>();
+        ArrayList<HashMap<String, String>> tokens;
         Reader.readFile("resources//java//code.txt", null);
         CharacterSet.readCharacterSet("resources//java//charset.txt");
         Tokens.readTokens();
@@ -18,8 +18,9 @@ public class Main {
         tokens = red.parseFile(file);
 
         for(HashMap<String, String> token : tokens){
-            //System.out.println(token.get("type") + " " + token.get("length") + " " + token.get("line") + " " + token.get("pointer"));
-            if(token.get("error") != null) System.out.println(token);
+            if(token.get("error") != null)
+                System.out.print("!!!Error:\"" + token.get("error") + "\" ");
+            System.out.print("Token:\"" + token.get("token").replace("\r", "") + "\" Line:" + token.get("line") + " Pointer:" + token.get("pointer") + " Type:" + token.get("type") + " Lenght:" + token.get("length") + "\n");
             //System.out.println(token);
         }
 

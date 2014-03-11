@@ -41,6 +41,7 @@ public class CharacterSet {
         String graphic_raw = alphanumeric_raw + special_raw;
         String spaces_raw = " |\t|\013|\n|\f";
         escape_sequences_raw += "|\n|\t|\b|\r|\f|\\|\'|\"| ";
+        escape_sequences_raw += "|\\n|\\t|\\b|\\r|\\f|\\|\'|\"| ";
 
         lower_case = lower_case_raw;
         upper_case = upper_case_raw;

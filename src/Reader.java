@@ -11,7 +11,6 @@ import java.util.HashMap;
  * Created by Butnaru Andrei-Madalin on 2/25/14.
  */
 
-// TODO de facut sa scaneze pana la separator(Tokens.separators) sau spatiu(CharacterSet.spaces) ( exemplu: nu recunoaste gresit "time += 4a;" )
 public class Reader {
 
     public static String readFile(String path, Charset encoding) {
@@ -157,7 +156,7 @@ public class Reader {
                 temp.put("line", Integer.toString(line));
                 temp.put("pointer", Integer.toString(column - tknLength));
 
-                if (returnStmt[0] == "wrong") {
+                if (returnStmt[0].equals("wrong")) {
                     temp.put("type", returnStmt[2]);
                     temp.put("error", returnStmt[returnStmt.length - 1]);
                 }
@@ -175,13 +174,13 @@ public class Reader {
                 continue;
             }
 
-            if (currentTknType.equals("number") && Tokens.Literals.validateNumberChar(currentChr)) {
+            if (currentTknType.equals("number") && !Tokens.shouldStop(currentChr)) {
                 currentTkn.append(currentChr);
                 i++;
                 continue;
             }
 
-            if (currentTknType.equals("number") && !Tokens.Literals.validateNumberChar(currentChr)) {
+            if (currentTknType.equals("number") && Tokens.shouldStop(currentChr)) {
                 temp = new HashMap<>();
                 String currentTknString = currentTkn.toString();
                 if (currentTknString.contains(".") || currentTknString.contains("e") || currentTknString.contains("E")) {
@@ -218,14 +217,18 @@ public class Reader {
                 continue;
             }
 
-            if (currentTknType.equals("char") && currentChr != '\'') {
+            if (currentTknType.equals("char") && !Tokens.shouldStop(currentChr)) {
                 currentTkn.append(currentChr);
                 i++;
                 continue;
             }
 
-            if (currentTknType.equals("char") && currentChr == '\'') {
-                currentTkn.append(currentChr);
+            if (currentTknType.equals("char") && Tokens.shouldStop(currentChr)) {
+                if(file.charAt(i+1) == '\''){
+                    currentTkn.append(currentChr);
+                    currentTkn.append(file.charAt(i+1));
+                    i+=2;
+                }
 
                 temp = new HashMap<>();
                 String currentTknString = currentTkn.toString();
@@ -245,7 +248,7 @@ public class Reader {
                 tokens.add(temp);
                 currentTkn.delete(0, currentTkn.length());
                 currentTknType = "";
-                i++;
+                column--;
                 continue;
             }
 
@@ -264,6 +267,10 @@ public class Reader {
 
             if (currentTknType.equals("string") && currentChr == '\"') {
                 currentTkn.append(currentChr);
+                if(!Tokens.shouldStop(file.charAt(i+1))){
+                    i++;
+                    continue;
+                }
 
                 temp = new HashMap<>();
                 String currentTknString = currentTkn.toString();
@@ -278,7 +285,7 @@ public class Reader {
                 temp.put("token", currentTknString);
                 temp.put("length", Integer.toString(tknLength));
                 temp.put("line", Integer.toString(line));
-                temp.put("pointer", Integer.toString(column - tknLength));
+                temp.put("pointer", Integer.toString(column - tknLength + 1));
 
                 tokens.add(temp);
                 currentTkn.delete(0, currentTkn.length());
@@ -330,14 +337,7 @@ public class Reader {
                 continue;
             }
 
-            if (CharacterSet.isSpace(currentChr)) {
-                if (currentChr == '\n') {
-                    line++;
-                    column = 0;
-                }
-                i++;
-                continue;
-            }
+
 
 
             if (currentTknType.equals("") && Tokens.validateOperatorChar(currentChr)) {
@@ -376,6 +376,14 @@ public class Reader {
                 continue;
             }
 
+            if (CharacterSet.isSpace(currentChr)) {
+                if (currentChr == '\n') {
+                    column = 0;
+                    line++;
+                }
+                i++;
+                continue;
+            }
             i++;
         } while (i < file.length());
 
